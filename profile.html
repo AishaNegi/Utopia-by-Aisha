@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Utopia by Aisha - Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bg-music" src="music.mp3" loop autoplay></audio>
+  <div class="container">
+    <h1>📋 Pet Profile</h1>
+    <div class="profile-section">
+      <label for="petName">Pet Name:</label>
+      <input type="text" id="petName" placeholder="Enter pet name" />
+      <label for="petAge">Pet Age:</label>
+      <input type="number" id="petAge" min="1" placeholder="e.g., 2" />
+      <button onclick="saveProfile()">💾 Save Profile</button>
+      <div class="summary" id="summaryBox">
+        <p><strong>Name:</strong> <span id="summaryName">-</span></p>
+        <p><strong>Age:</strong> <span id="summaryAge">-</span></p>
+        <p><strong>Happiness:</strong> <span id="summaryHappy">-</span></p>
+        <p><strong>Hunger:</strong> <span id="summaryHunger">-</span></p>
+      </div>
+    </div>
+    <div class="nav">
+      <a href="index.html">🏠 Back to Home</a>
+    </div>
+  </div>
+  <script>
+    const nameInput = document.getElementById("petName");
+    const ageInput = document.getElementById("petAge");
+    function saveProfile() {
+      localStorage.setItem("petName", nameInput.value);
+      localStorage.setItem("petAge", ageInput.value);
+      updateSummary();
+    }
+    function updateSummary() {
+      document.getElementById("summaryName").innerText = localStorage.getItem("petName") || "-";
+      document.getElementById("summaryAge").innerText = localStorage.getItem("petAge") || "-";
+      document.getElementById("summaryHappy").innerText = localStorage.getItem("happiness") + "%";
+      document.getElementById("summaryHunger").innerText = localStorage.getItem("hunger") + "%";
+    }
+    nameInput.value = localStorage.getItem("petName") || "";
+    ageInput.value = localStorage.getItem("petAge") || "";
+    updateSummary();
+  </script>
+</body>
+</html>

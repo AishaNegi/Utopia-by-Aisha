@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Utopia by Aisha - Garden</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bg-music" src="C:\Users\HP\Downloads\samurai-ethereal-flutes-ethnic-flute-relaxing-meditation-music-248254.mp3" loop></audio>
+  <div class="container">
+    <h1>🌳 Garden Time</h1>
+    <div class="pet" id="pet"></div>
+    <div class="speech" id="gardenSpeech">The air feels fresh here! 🌼</div>
+    <div class="butterflies">🦋 🐞 🌸 🐦</div>
+    <div class="nav">
+      <a href="game.html">🎮 Play Mini-Game</a>
+      <a href="index.html">🏠 Back to Home</a>
+      <a href="settings.html">⚙️ Settings</a>
+    </div>
+  </div>
+  <script>
+    const music = document.getElementById("bg-music");
+    document.body.addEventListener("click", () => {
+      if (music.paused) music.play();
+    });
+    setTimeout(() => {
+      document.getElementById("gardenSpeech").innerText = "Wanna play something?";
+    }, 3000);
+  </script>
+</body>
+</html>

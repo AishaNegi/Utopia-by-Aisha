@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Utopia by Aisha - Bug Catch Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f0f8ff;
+    }
+    .game-box {
+      width: 100%;
+      height: 300px;
+      position: relative;
+      background: #e0ffe0;
+      border: 2px dashed #aaa;
+      border-radius: 15px;
+      margin-top: 20px;
+      overflow: hidden;
+    }
+    .bug {
+      width: 30px;
+      height: 30px;
+      background-color: #ff6347;
+      border-radius: 50%;
+      position: absolute;
+      cursor: pointer;
+      user-select: none;
+    }
+    .score {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .nav {
+      margin-top: 20px;
+    }
+    .nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #4caf50;
+    }
+    .nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎮 Bug Catch Game</h1>
+  <p class="score">Score: <span id="score">0</span></p>
+  <p class="score">Happiness: <span id="happiness">80</span></p>
+  <div class="game-box" id="gameBox"></div>
+  <div class="nav">
+    <a href="garden.html">🌳 Back to Garden</a>
+    <a href="index.html">🏠 Home</a>
+  </div>
+
+  <script>
+    let score = 0;
+    let happiness = parseFloat(localStorage.getItem("happiness")) || 80;
+    const scoreDisplay = document.getElementById("score");
+    const happinessDisplay = document.getElementById("happiness");
+    const gameBox = document.getElementById("gameBox");
+
+    function spawnBug() {
+      const bug = document.createElement("div");
+      bug.classList.add("bug");
+      bug.style.top = Math.random() * (gameBox.offsetHeight - 30) + "px";
+      bug.style.left = Math.random() * (gameBox.offsetWidth - 30) + "px";
+      
+      bug.onclick = () => {
+        bug.remove();
+        score++;
+        happiness = Math.min(100, happiness + 2);
+        scoreDisplay.innerText = score;
+        happinessDisplay.innerText = happiness;
+        localStorage.setItem("happiness", happiness);
+      };
+      
+      gameBox.appendChild(bug);
+      
+      // Remove bug after 2 seconds if not clicked
+      setTimeout(() => {
+        if (bug.parentElement) bug.remove();
+      }, 2000);
+    }
+
+    // Spawn bugs every 1 second
+    setInterval(spawnBug, 1000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Utopia by Aisha - Settings</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <audio id="bg-music" src="music.mp3" loop autoplay></audio>
+  <div class="container">
+    <h1>⚙️ Settings</h1>
+    <div class="settings-box">
+      <label for="theme">🌈 Choose Theme:</label>
+      <select id="theme" onchange="changeTheme(this.value)">
+        <option value="default">Soft Peach (Default)</option>
+        <option value="dark">Moonlight Dark</option>
+        <option value="aqua">Aqua Bliss</option>
+      </select>
+      <label>🎵 Music Controls:</label>
+      <button onclick="toggleMusic()">🔊 Toggle Music</button>
+    </div>
+    <div class="nav">
+      <a href="index.html">🏠 Back to Home</a>
+    </div>
+  </div>
+  <script>
+    const body = document.body;
+    const music = document.getElementById("bg-music");
+    function toggleMusic() {
+      if (music.paused) music.play();
+      else music.pause();
+    }
+    function changeTheme(theme) {
+      localStorage.setItem("theme", theme);
+      applyTheme(theme);
+    }
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        body.style.background = "linear-gradient(to top right, #2c3e50, #34495e)";
+        body.style.color = "white";
+      } else if (theme === "aqua") {
+        body.style.background = "linear-gradient(to top right, #a1ffce, #faffd1)";
+        body.style.color = "#004d40";
+      } else {
+        body.style.background = "linear-gradient(to top right, #ffecd2, #fcb69f)";
+        body.style.color = "#333";
+      }
+    }
+    const savedTheme = localStorage.getItem("theme") || "default";
+    document.getElementById("theme").value = savedTheme;
+    applyTheme(savedTheme);
+  </script>
+</body>
+</html>
